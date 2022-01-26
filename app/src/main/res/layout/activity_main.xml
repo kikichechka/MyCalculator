@@ -1,8 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
+
+<androidx.constraintlayout.widget.ConstraintLayout
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
 
     <TextView
         android:id="@+id/result"
@@ -14,7 +20,9 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toTopOf="@id/button_c"
         app:layout_constraintVertical_chainStyle="packed"
+        app:layout_constraintHorizontal_chainStyle="spread"
         app:layout_constraintWidth_percent=".80" />
 
     <Button
@@ -202,7 +210,8 @@
         android:textSize="40sp"
         app:layout_constraintEnd_toStartOf="@id/button_0"
         app:layout_constraintStart_toStartOf="@id/button_1"
-        app:layout_constraintTop_toBottomOf="@id/button_1" />
+        app:layout_constraintTop_toBottomOf="@id/button_1"
+        app:layout_constraintBottom_toBottomOf="parent"/>
 
     <Button
         android:id="@+id/button_0"
@@ -213,7 +222,6 @@
         app:layout_constraintEnd_toStartOf="@id/button_comma"
         app:layout_constraintStart_toEndOf="@id/button_percent"
         app:layout_constraintTop_toBottomOf="@id/button_2"
-
         />
 
     <Button
@@ -225,8 +233,8 @@
         app:layout_constraintEnd_toStartOf="@id/button_equals"
         app:layout_constraintStart_toEndOf="@id/button_0"
         app:layout_constraintTop_toBottomOf="@+id/button_3"
-
         />
 
-
 </androidx.constraintlayout.widget.ConstraintLayout>
+
+</ScrollView>
