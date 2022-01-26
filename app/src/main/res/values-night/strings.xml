@@ -4,4 +4,5 @@
     <string name="button_delete1">«</string>
     <string name="button_equals">=</string>
     <string name="starting_value">0</string>
+    <string name="result">0</string>
 </resources>
