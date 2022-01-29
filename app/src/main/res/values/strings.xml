@@ -1,23 +1,25 @@
 <resources>
     <string name="app_name">My Calculator</string>
-    <string name="number_1">1</string>
-    <string name="number_2">2</string>
-    <string name="number_3">3</string>
-    <string name="number_4">4</string>
-    <string name="number_5">5</string>
-    <string name="number_6">6</string>
+    <string name="button_1">1</string>
+    <string name="button_delete">C</string>
+    <string name="button_division">÷</string>
+    <string name="button_multiplication">*</string>
     <string name="number_7">7</string>
     <string name="number_8">8</string>
     <string name="number_9">9</string>
-    <string name="number_0">0</string>
-    <string name="button_percent">%</string>
-    <string name="button_comma">,</string>
     <string name="button_minus">-</string>
+    <string name="number_4">4</string>
+    <string name="number_5">5</string>
+    <string name="number_6">6</string>
     <string name="button_plus">+</string>
+    <string name="number_1">1</string>
+    <string name="number_2">2</string>
+    <string name="number_3">3</string>
     <string name="button_equals">=</string>
-    <string name="button_delete">C</string>
-    <string name="button_division">÷</string>
-    <string name="button_multiplication">×</string>
-    <string name="button_delete1">«</string>
-    <string name="result">0</string>
+    <string name="button_percent">%</string>
+    <string name="button_0">0</string>
+    <string name="button_dot">.</string>
+    <string name="input" />
+
+
 </resources>
