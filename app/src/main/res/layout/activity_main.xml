@@ -76,16 +76,16 @@
             app:layout_constraintTop_toBottomOf="@id/result" />
 
 
-
         <Button
             android:id="@+id/button_7"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
+            android:backgroundTint="@color/copper"
             android:text="@string/number_7"
             android:textSize="40sp"
-            android:backgroundTint="@color/copper"
             app:layout_constraintBottom_toTopOf="@id/button_4"
             app:layout_constraintEnd_toEndOf="@id/button_c"
+            app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="@id/button_c"
             app:layout_constraintTop_toBottomOf="@id/button_c" />
 
