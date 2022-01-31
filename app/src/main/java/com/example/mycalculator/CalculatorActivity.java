@@ -6,23 +6,21 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.TextView;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
-public class MainActivity extends AppCompatActivity {
-
-    protected static boolean flag = true;
-    protected static TextView input;
-    protected static TextView result;
-    protected static String symbol;
-    protected static float answer = 0f;
+public class CalculatorActivity extends AppCompatActivity {
+    private boolean flag = true;
+    private TextView input;
+    private TextView result;
+    private String symbol;
+    private float answer = 0f;
+    ArrayList listNumber = new ArrayList<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
-
-        // коллекция всех значений
-        ArrayList<String> list_number = new ArrayList<>();
+        setContentView(R.layout.activity_calculator);
 
         // поле вывода текста
         input = findViewById(R.id.input);
@@ -31,80 +29,68 @@ public class MainActivity extends AppCompatActivity {
         result = findViewById(R.id.result);
 
         // кнопка "с" удаление всех значений из коллекций
-        findViewById(R.id.button_c).setOnClickListener(view -> {
-            list_number.clear();
-            input.setText("0");
-            answer = 0.0F;
-            symbol = null;
-            result.setText(String.valueOf(answer));
-        });
+        findViewById(R.id.button_c).setOnClickListener(view -> methodDelete(listNumber));
 
         // кнопка умножение
-        findViewById(R.id.button_multiplication).setOnClickListener(view -> methodAddSymbol(list_number, "*"));
+        findViewById(R.id.button_multiplication).setOnClickListener(view -> methodAddSymbol(listNumber, "*"));
 
         // кнопка деление
-        findViewById(R.id.button_division).setOnClickListener(view -> methodAddSymbol(list_number, "÷"));
+        findViewById(R.id.button_division).setOnClickListener(view -> methodAddSymbol(listNumber, "÷"));
 
         // кнопка минус
-        findViewById(R.id.button_minus).setOnClickListener(view -> methodAddSymbol(list_number, "-"));
+        findViewById(R.id.button_minus).setOnClickListener(view -> methodAddSymbol(listNumber, "-"));
 
         // кнопка плюс
-        findViewById(R.id.button_plus).setOnClickListener(view -> methodAddSymbol(list_number, "+"));
+        findViewById(R.id.button_plus).setOnClickListener(view -> methodAddSymbol(listNumber, "+"));
 
         // кнопка равно
-        findViewById(R.id.button_equals).setOnClickListener(view -> {
-            symbol = null;
-            list_number.clear();
-            calculation(list_number,String.valueOf(answer));
-            answer = 0.0f;
-            result.setText(String.valueOf(answer));
-        });
+        findViewById(R.id.button_equals).setOnClickListener(view -> equals(listNumber));
 
         // кнопка проценты
-        findViewById(R.id.button_percent).setOnClickListener(view -> methodAddSymbol(list_number, "%"));
+        findViewById(R.id.button_percent).setOnClickListener(view -> methodAddSymbol(listNumber, "%"));
 
         // кнопка точка
-        findViewById(R.id.button_dot).setOnClickListener(view -> calculation(list_number, "."));
+        findViewById(R.id.button_dot).setOnClickListener(view -> methodAddSymbol(listNumber, "."));
 
         // 1
-        findViewById(R.id.button_1).setOnClickListener(view -> calculation(list_number, "1"));
+        findViewById(R.id.button_1).setOnClickListener(view -> calculation(listNumber, "1"));
 
         // 2
-        findViewById(R.id.button_2).setOnClickListener(view -> calculation(list_number, "2"));
+        findViewById(R.id.button_2).setOnClickListener(view -> calculation(listNumber, "2"));
 
         // 3
-        findViewById(R.id.button_3).setOnClickListener(view -> calculation(list_number, "3"));
+        findViewById(R.id.button_3).setOnClickListener(view -> calculation(listNumber, "3"));
 
         // 4
-        findViewById(R.id.button_4).setOnClickListener(view -> calculation(list_number, "4"));
+        findViewById(R.id.button_4).setOnClickListener(view -> calculation(listNumber, "4"));
 
         // 5
-        findViewById(R.id.button_5).setOnClickListener(view -> calculation(list_number, "5"));
+        findViewById(R.id.button_5).setOnClickListener(view -> calculation(listNumber, "5"));
 
         // 6
-        findViewById(R.id.button_6).setOnClickListener(view -> calculation(list_number, "6"));
+        findViewById(R.id.button_6).setOnClickListener(view -> calculation(listNumber, "6"));
 
         // 7
-        findViewById(R.id.button_7).setOnClickListener(view -> calculation(list_number, "7"));
+        findViewById(R.id.button_7).setOnClickListener(view -> calculation(listNumber, "7"));
 
         // 8
-        findViewById(R.id.button_8).setOnClickListener(view -> calculation(list_number, "8"));
+        findViewById(R.id.button_8).setOnClickListener(view -> calculation(listNumber, "8"));
 
         // 9
-        findViewById(R.id.button_9).setOnClickListener(view -> calculation(list_number, "9"));
+        findViewById(R.id.button_9).setOnClickListener(view -> calculation(listNumber, "9"));
 
         // 0
-        findViewById(R.id.button_0).setOnClickListener(view -> calculation(list_number, "0"));
+        findViewById(R.id.button_0).setOnClickListener(view -> calculation(listNumber, "0"));
     }
 
 
+
     // метод добавления в коллекцию чисел
-    public static void calculation(ArrayList list, String value) {
+    public void calculation(ArrayList list, String value) {
         if (symbol == null) { // если символ арифметической операции не был введен ранее
             list.add(value); // добавляем цифру в коллекцию
             view(list); // выводим коллекцию в textView
-        }
-        else { // если символ арифметической операции был введен ранее
+        } else { // если символ арифметической операции был введен ранее
             list.add(value); // добавляем цифру в коллекцию
             flag = true;
             arithmeticOperation(list); // выполняем арифметическую операцию с двумя числами, выведенными из массива
@@ -114,7 +100,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     // добавление в коллекцию символов
-    public static void methodAddSymbol(ArrayList list, String value) {
+    public void methodAddSymbol(ArrayList list, String value) {
         if (list.size() != 0 && flag) {
             flag = false;
             symbol = value;
@@ -124,16 +110,16 @@ public class MainActivity extends AppCompatActivity {
     }
 
     // вывод значений Arraylist в textView
-    public static void view(ArrayList list) {
-        String value_result = "";
+    public void view(ArrayList list) {
+        String valueResult = "";
         for (Object o : list) {
-            value_result += o;
+            valueResult += o;
         }
-        input.setText(value_result);
+        input.setText(valueResult);
     }
 
     // вычисление двух чисел, взятых из коллекции
-    public static void arithmeticOperation(ArrayList list) {
+    public void arithmeticOperation(ArrayList list) {
         int symbolNumber = list.lastIndexOf(symbol); // записали индекс последнего символа в коллекции
         String numberOne = "";
         String numberTwo = "";
@@ -178,5 +164,24 @@ public class MainActivity extends AppCompatActivity {
                 answer = number1 * number2 / 100;
                 break;
         }
+    }
+
+    // метод равно
+    public void equals(ArrayList list) {
+        symbol = null;
+        list.clear();
+        calculation(list, String.valueOf(answer));
+        answer = 0.0f;
+        result.setText("");
+        list.clear();
+    }
+
+    // метод кнопки С
+    public void methodDelete (ArrayList list) {
+        list.clear();
+        input.setText("0");
+        answer = 0.0F;
+        symbol = null;
+        result.setText(String.valueOf(answer));
     }
 }
