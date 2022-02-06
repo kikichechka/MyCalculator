@@ -1,11 +1,9 @@
 package com.example.mycalculator;
 
 import android.os.Bundle;
-import android.os.PersistableBundle;
 import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
-import java.util.ArrayList;
 
 public class CalculatorActivity extends AppCompatActivity {
     CalculatorDevelopment calculatorDevelopment = new CalculatorDevelopment();

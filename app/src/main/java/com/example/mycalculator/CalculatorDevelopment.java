@@ -2,7 +2,6 @@ package com.example.mycalculator;
 import android.os.Parcel;
 import android.os.Parcelable;
 
-import java.io.Serializable;
 import java.util.ArrayList;
 
 public class CalculatorDevelopment implements Parcelable {
@@ -15,12 +14,9 @@ public class CalculatorDevelopment implements Parcelable {
     public CalculatorDevelopment() {
 
     }
-
-
     public float getAnswer() {
         return answer;
     }
-
 
     /**
      * распределение методов для кнопок
@@ -47,24 +43,30 @@ public class CalculatorDevelopment implements Parcelable {
                 equals();
                 break;
             default:
-                calculation(value);
+                methodAddNumber(value);
                 break;
         }
     }
 
     /** метод добавления в коллекцию чисел
      * @param value
-     * 1) если символ арифметической операции не был введен ранее
+     * 1) если первым вводится 0, или 0 вводится после знака "-", добавляется точка
+     * 2) если символ арифметической операции не был введен ранее
      * добавляется цифра в коллекцию
      * flag = true (разрешение на следующий ввод символа)
      *
-     * 2) во всех других случаях
+     * 3) во всех других случаях
      * добавляется цифра в коллекцию
      * flag = true (разрешение на следующий ввод символа)
      * выполняется арифметическая операция с двумя числами, выведенными из массива
      */
-    public void calculation(String value) {
-        if (symbol == null) {
+    public void methodAddNumber(String value) {
+        if (listNumber.size() == 0 && value.equals("0") || listNumber.size() == 1 && listNumber.get(0).equals("-") && value.equals("0")) {
+            listNumberAdd(value);
+            listNumberAdd(".");
+            symbol = ".";
+            flag = false;
+        } else if (symbol == null) {
             listNumberAdd(value);
             flag = true;
         } else {
@@ -77,7 +79,6 @@ public class CalculatorDevelopment implements Parcelable {
     /** добавление в коллекцию символов
      * @param value
      * 1) для ввода отрицательного числа
-     *
      * если колекция пустая и введенный символ является "-"
      * flag = false (запрет на следующий ввод символа)
      * добавление значения в коллекцию
@@ -160,7 +161,7 @@ public class CalculatorDevelopment implements Parcelable {
     public void equals() {
         symbol = null;
         listNumber.clear();
-        calculation(String.valueOf(answer));
+        methodAddNumber(String.valueOf(answer));
         answer = 0.0f;
     }
 
