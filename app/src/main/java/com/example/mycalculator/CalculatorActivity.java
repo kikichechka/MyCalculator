@@ -1,9 +1,18 @@
 package com.example.mycalculator;
 
+import android.content.Context;
+import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.view.View;
 import android.widget.TextView;
+import android.widget.Toast;
+
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+
+import com.example.mycalculator.domain.Themes;
+import com.example.mycalculator.storage.ThemeStorage;
 
 public class CalculatorActivity extends AppCompatActivity {
     CalculatorDevelopment calculatorDevelopment = new CalculatorDevelopment();
@@ -15,7 +24,33 @@ public class CalculatorActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        ThemeStorage storage = new ThemeStorage(this);
+
+        setTheme(storage.getThemes().getStyle());
+
         setContentView(R.layout.activity_calculator);
+
+        String appName = getResources().getString(R.string.app_name);
+        Toast.makeText(this, appName, Toast.LENGTH_LONG).show();
+
+        findViewById(R.id.theme_1).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                storage.saveThemes(Themes.ONE);
+                Intent intent = new Intent(CalculatorActivity.this, CalculatorActivity.class);
+                startActivity(intent);
+            }
+        });
+
+        findViewById(R.id.theme_2).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                storage.saveThemes(Themes.TWO);
+                Intent intent = new Intent(CalculatorActivity.this, CalculatorActivity.class);
+                startActivity(intent);
+            }
+        });
 
         // поле вывода текста
         input = findViewById(R.id.input);
@@ -42,7 +77,7 @@ public class CalculatorActivity extends AppCompatActivity {
         findViewById(R.id.button_equals).setOnClickListener(view -> pressingButton("="));
 
         // кнопка проценты
-        findViewById(R.id.button_percent).setOnClickListener(view -> pressingButton( "%"));
+        findViewById(R.id.button_percent).setOnClickListener(view -> pressingButton("%"));
 
         // кнопка точка
         findViewById(R.id.button_dot).setOnClickListener(view -> pressingButton("."));
@@ -81,7 +116,7 @@ public class CalculatorActivity extends AppCompatActivity {
     @Override
     protected void onSaveInstanceState(@NonNull Bundle outState) {
         super.onSaveInstanceState(outState);
-        outState.putParcelable(KEY,calculatorDevelopment);
+        outState.putParcelable(KEY, calculatorDevelopment);
     }
 
     @Override
@@ -91,7 +126,7 @@ public class CalculatorActivity extends AppCompatActivity {
         view();
     }
 
-    private void pressingButton (String value) {
+    private void pressingButton(String value) {
         calculatorDevelopment.distribution(value);
         view();
 

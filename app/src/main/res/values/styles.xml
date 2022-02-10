@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <style name="CalcButtonNumber">
+        <item name="android:backgroundTint">@color/grey</item>
+        <item name="android:textSize">@dimen/size_bottom</item>
+        <item name="fontFamily">@font/appetite_italic</item>
+        <item name="cornerRadius">10dp</item>
+        <item name="android:textColor">@color/white</item>
+        <item name="android:textAlignment">center</item>
+        <item name="layout_constraintVertical_chainStyle">packed</item>
+    </style>
+
+    <style name="CalcButtonNumber.CalcButtonSymbol">
+        <item name="android:backgroundTint">@color/blue</item>
+    </style>
+
+    <style name="CalcButtonNumber.CalcButtonSymbol.2">
+        <item name="android:backgroundTint">@color/yellow</item>
+    </style>
+
+    <style name="CalcButtonNumber.CalcButtonSymbol.3">
+        <item name="android:backgroundTint">@color/red</item>
+    </style>
+</resources>

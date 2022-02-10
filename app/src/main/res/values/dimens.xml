@@ -1,5 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <dimen name="size_text">40sp</dimen>
+    <dimen name="size_text_1">40sp</dimen>
+    <dimen name="size_text_2">20sp</dimen>
+    <dimen name="size_text_3">30sp</dimen>
     <dimen name="size_bottom">40sp</dimen>
 </resources>
